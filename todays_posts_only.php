@@ -60,7 +60,7 @@ if (! defined('WPINC')) {
     'TodaysPostsOnly'
   );
 
-  if (! function_exixts ('todays_posts_only_shortcode')) {
+  if (! function_exists ('todays_posts_only_shortcode')) {
 
 
     /**
@@ -73,7 +73,7 @@ if (! defined('WPINC')) {
      * such elsewhere.
      *
      * @param string[] $attributes passed to the shortcode
-     * @return boolean TRUE if todays_posts_only succeeded; FALSE, otherwise
+     * @return string '' if todays_posts_only succeeded; FALSE, otherwise
      */
     function todays_posts_only_shortcode ($attributes = array()) {
       // obtain an array based on the attributes passed to the shortcode
@@ -118,7 +118,7 @@ if (! defined('WPINC')) {
      * http://php.net/manual/en/function.date-parse.php
      *
      * @param string[] $atts elements to filter posts
-     * @return boolean TRUE if posts were found; FALSE otherwise
+     * @return boolean an empty string if posts were found; FALSE otherwise
      **/
     function todays_posts_only($atts) {
 
@@ -184,14 +184,17 @@ if (! defined('WPINC')) {
         // loop through all of the posts the query returned
         while ($custom_query->have_posts()) {
           $custom_query->the_post();
-          get_template_part($template_part, get_post_format());
+
+          $format = get_post_format();
+          get_template_part($template_part, $format);
+
         }// end custom loop
 
         // restore the global $post from the main query loop
         // https://codex.wordpress.org/Function_Reference/wp_reset_postdata
         wp_reset_postdata();
 
-        return TRUE;
+        return '';
 
       } else {
 
