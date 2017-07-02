@@ -209,6 +209,7 @@ if (! defined('WPINC')) {
 
   // register the shortcode
   // see: https://codex.wordpress.org/Function_Reference/add_shortcode
-  add_shortcode('todays_posts_only', 'todays_posts_only');
+  // add_shortcode(shortcode, function)
+  add_shortcode('todays_posts_only', 'todays_posts_only_shortcode');
 
 ?>
